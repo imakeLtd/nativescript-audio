@@ -3,7 +3,7 @@ import { TNSRecordI } from '../common';
 import { AudioRecorderOptions } from '../options';
 
 @NativeClass()
-export class TNSRecorderDelegate
+class TNSRecorderDelegate
   extends NSObject
   implements AVAudioRecorderDelegate {
   static ObjCProtocols = [AVAudioRecorderDelegate];
@@ -25,7 +25,7 @@ export class TNSRecorderDelegate
     }
   }
 
-  audioRecorderDidFinishRecordingSuccessfully(recorder: AVAudioRecorder, flag) {
+  audioRecorderDidFinishRecordingSuccessfully(recorder: AVAudioRecorder, flag: any) {
     console.log(`audioRecorderDidFinishRecordingSuccessfully: ${flag}`);
     const owner = this._owner.get();
     if (owner) {
@@ -35,11 +35,12 @@ export class TNSRecorderDelegate
     }
   }
 }
+export { TNSRecorderDelegate }
 
 export class TNSRecorder extends Observable implements TNSRecordI {
   private _recorder: any;
   private _recordingSession: any;
-
+  // @ts-ignore
   private _recorderOptions: AudioRecorderOptions;
 
   static CAN_RECORD(): boolean {

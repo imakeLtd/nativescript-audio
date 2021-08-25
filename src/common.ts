@@ -130,5 +130,7 @@ export function resolveAudioFilePath(path: string) {
       }
       return audioPath;
     }
+  } else {
+    return null;
   }
 }

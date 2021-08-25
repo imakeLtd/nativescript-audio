@@ -2,10 +2,10 @@ import { knownFolders, Observable, path as nsFilePath, Utils } from '@nativescri
 import { TNSPlayerI } from '../common';
 import { AudioPlayerOptions } from '../options';
 
-declare var AVAudioPlayer;
+declare var AVAudioPlayer: any;
 
 @NativeClass()
-export class TNSPlayerDelegate
+class TNSPlayerDelegate
   extends NSObject
   implements AVAudioPlayerDelegate {
   static ObjCProtocols = [AVAudioPlayerDelegate];
@@ -37,6 +37,7 @@ export class TNSPlayerDelegate
     }
   }
 }
+export { TNSPlayerDelegate }
 
 export class AudioFocusManager extends Observable {
 }
@@ -370,7 +371,7 @@ export class TNSPlayer extends Observable implements TNSPlayerI {
     });
   }
 
-  public changePlayerSpeed(speed) {
+  public changePlayerSpeed(speed: any) {
     if (this._player && speed) {
       // make sure speed is a number/float
       if (typeof speed === 'string') {

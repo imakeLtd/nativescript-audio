@@ -176,6 +176,7 @@ function getGlobalMixingManager(): AudioFocusManager {
 
 export class TNSPlayer implements TNSPlayerI {
   private _mediaPlayer: android.media.MediaPlayer;
+  // @ts-ignore
   private _lastPlayerVolume; // ref to the last volume setting so we can reset after ducking
   private _wasPlaying = false;
   private _events: Observable;
@@ -245,6 +246,7 @@ export class TNSPlayer implements TNSPlayerI {
     );
     this._audioFocusManager?.abandonAudioFocus(this);
     this._audioFocusManager = manager;
+    // @ts-ignore
     this._audioFocusManager?.on(
       'audioFocusChange',
       this._onAudioFocusChange,
@@ -422,7 +424,7 @@ export class TNSPlayer implements TNSPlayerI {
     });
   }
 
-  public changePlayerSpeed(speed) {
+  public changePlayerSpeed(speed: any) {
     // this checks on API 23 and up
     if (android.os.Build.VERSION.SDK_INT >= 23 && this.play) {
       if (this._player?.isPlaying()) {
